@@ -1,0 +1,21 @@
+# Build output
+build/
+.gradle/
+*.apk
+*.aar
+
+# Machine-specific: points at wherever this SDK happens to live
+local.properties
+
+# Provisioning payloads. These carry the Wi-Fi password in plain text when one
+# is supplied, and the QR image encodes it just as readably - neither belongs in
+# a repository. Generate them locally with tools/make-provisioning-qr.ps1.
+tools/*.json
+tools/*.properties
+tools/*.png
+tools/serve/
+
+# IDE
+.idea/
+*.iml
+.DS_Store

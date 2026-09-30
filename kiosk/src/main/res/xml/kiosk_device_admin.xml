@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- No policies are requested here. Everything this library does comes from
+     being device owner, which is granted by provisioning rather than by asking
+     for individual admin policies. -->
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies />
+</device-admin>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="false"
+        android:icon="@android:drawable/ic_lock_lock"
+        android:label="Kiosk Demo"
+        android:theme="@android:style/Theme.Material.Light">
+
+        <activity
+            android:name=".DemoActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="fullSensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+          CATEGORY_HOME goes on an alias, not on the activity, so that being
+          Home can be switched off later. An intent filter cannot be revoked at
+          runtime, but a component can be disabled - which is what
+          Kiosk.setBecomeHome does to this alias.
+
+          The name matters: the library looks for <package>.KioskHomeAlias.
+          Point targetActivity at whichever activity calls Kiosk.attach.
+        -->
+        <activity-alias
+            android:name=".KioskHomeAlias"
+            android:targetActivity=".DemoActivity"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+    </application>
+</manifest>

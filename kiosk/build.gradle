@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.mk.kiosk'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 26
+        targetSdk 34
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release { minifyEnabled false }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint { checkReleaseBuilds false }
+
+    publishing {
+        singleVariant('release') { withSourcesJar() }
+    }
+}
+
+// Lets the library be consumed three ways from one build:
+//   - the .aar in kiosk/build/outputs/aar/
+//   - `publishToMavenLocal` then implementation 'com.mk:kiosk:<version>'
+//   - JitPack, which runs this same publication from a git tag
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.mk'
+            artifactId = 'kiosk'
+            version = '1.2.0'
+            afterEvaluate { from components.release }
+        }
+    }
+}
+
+
